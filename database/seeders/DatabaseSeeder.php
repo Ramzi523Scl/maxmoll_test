@@ -3,11 +3,6 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Cart;
-use App\Models\CartProduct;
-use App\Models\Category;
-use App\Models\Client;
-use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Database\Seeder;
 
@@ -19,6 +14,7 @@ class DatabaseSeeder extends Seeder
 	public function run(): void
 	{
 
+		Product::factory(100)->create();
 
 	}
 }

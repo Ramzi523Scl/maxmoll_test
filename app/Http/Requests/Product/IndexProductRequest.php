@@ -10,12 +10,12 @@ class IndexProductRequest extends FormRequest
 	{
 
 		return [
-			'order_by_field'     => 'nullable|string|in:id,created_at,category,price,weight,length',
+			'order_by_field'     => 'nullable|string|in:id,created_at,price,name',
 			'order_by_direction' => 'nullable|string',
-			'price_min'          => 'nullable|integer',
-			'price_max'          => 'nullable|integer',
+			'price_min'          => 'nullable|integer|min:0',
+			'price_max'          => 'nullable|integer|min:0',
 			'first'              => 'nullable|int|min:10|max:100',
-			'page'               => 'nullable|int',
+			'page'               => 'nullable|int|min:1',
 		];
 	}
 
