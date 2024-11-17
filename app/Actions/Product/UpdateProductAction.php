@@ -10,7 +10,7 @@ class UpdateProductAction
 	public function handle(UpdateProductRequest $request, Product $product): Product
 	{
 		$data = $request->validated();
-		$product->update($data);
+		$product->load('stocks.warehouse')->update($data);
 
 		return $product;
 	}

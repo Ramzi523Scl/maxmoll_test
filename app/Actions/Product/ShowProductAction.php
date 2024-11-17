@@ -8,7 +8,7 @@ class ShowProductAction
 {
 	public function handle(Product $product): Product
 	{
-		return $product;
+		return $product->load('stocks.warehouse');
 	}
 
 }

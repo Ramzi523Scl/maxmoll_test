@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\V1\OrderController;
 use App\Http\Controllers\Api\V1\ProductController;
+use App\Http\Controllers\Api\V1\StockController;
 use App\Http\Controllers\Api\V1\WarehouseController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,7 @@ Route::prefix('v1')->group(function () {
 
 	Route::apiResource('products', ProductController::class);
 	Route::apiResource('warehouses', WarehouseController::class);
+	Route::apiResource('stocks', StockController::class)->only(['index', 'show']);
 
 	Route::controller(OrderController::class)->group(function () {
 		Route::get('orders', 'index');
