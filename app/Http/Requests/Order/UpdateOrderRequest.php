@@ -2,11 +2,12 @@
 
 namespace App\Http\Requests\Order;
 
+use App\Models\Order;
 use App\Rules\IsExistStocksInWareHouseRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreOrderRequest extends FormRequest
+class UpdateOrderRequest extends FormRequest
 {
 	public function rules(): array
 	{
@@ -30,4 +31,5 @@ class StoreOrderRequest extends FormRequest
 			],
 		];
 	}
+
 }

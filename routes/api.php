@@ -26,6 +26,7 @@ Route::prefix('v1')->group(function () {
 	Route::controller(OrderController::class)->group(function () {
 		Route::get('orders', 'index');
 		Route::post('orders', 'store');
+		Route::patch('orders/{order}', 'update');
 	});
 
 });

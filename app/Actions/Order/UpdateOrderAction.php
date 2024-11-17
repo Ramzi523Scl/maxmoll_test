@@ -2,13 +2,13 @@
 
 namespace App\Actions\Order;
 
-use App\Http\Requests\Order\StoreOrderRequest;
+use App\Http\Requests\Order\UpdateOrderRequest;
 use App\Models\Order;
 use App\Models\Stock;
 
-class StoreOrderAction
+class UpdateOrderAction
 {
-	public function handle(StoreOrderRequest $request)
+	public function handle(UpdateOrderRequest $request, Order $order): Order
 	{
 
 		$data  = $request->validated();
@@ -16,14 +16,20 @@ class StoreOrderAction
 		unset($data['items']);
 
 		\DB::beginTransaction();
-			$order = Order::create($data);
+		$order->update($data);
 
-			$order->items()->createMany($items);
+			$this->updateOrderItems($order, $items);
 
-			$this->updateStocks($items, $data['warehouse_id']);
+		$this->updateStocks($items, $data['warehouse_id']);
 		\DB::commit();
 
 		return $order->load(['items.product', 'warehouse']);
+
+	}
+
+	private function updateOrderItems(Order $order, array $items): void
+	{
+		//todo: удалять все, возвращать в склад остатки, обратно добавлять и добавлять остатки
 
 	}
 
@@ -39,4 +45,6 @@ class StoreOrderAction
 
 		}
 	}
+
+
 }
