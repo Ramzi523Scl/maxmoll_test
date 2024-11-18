@@ -2,13 +2,13 @@
 
 namespace App\Actions\Order;
 
-use App\Http\Requests\Order\StoreOrderRequest;
+use App\Http\Requests\Order\OrderRequest;
 use App\Models\Order;
 use App\Models\Stock;
 
 class StoreOrderAction
 {
-	public function handle(StoreOrderRequest $request)
+	public function handle(OrderRequest $request)
 	{
 
 		$data  = $request->validated();

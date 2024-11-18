@@ -23,10 +23,17 @@ Route::prefix('v1')->group(function () {
 	Route::apiResource('warehouses', WarehouseController::class);
 	Route::apiResource('stocks', StockController::class)->only(['index', 'show']);
 
-	Route::controller(OrderController::class)->group(function () {
-		Route::get('orders', 'index');
-		Route::post('orders', 'store');
-		Route::patch('orders/{order}', 'update');
+	Route::prefix('orders')->controller(OrderController::class)->group(function () {
+		Route::get('', 'index');
+		Route::post('', 'store');
+
+		Route::prefix('{order}')->group(function () {
+			Route::patch('', 'update');
+			Route::patch('complete', 'complete');
+			Route::patch('cancel', 'cancel');
+			Route::patch('resume', 'resume');
+		});
+
 	});
 
 });
