@@ -23,7 +23,7 @@ class Order extends Model
 		];
 
 	protected $casts = [
-			'completed_at' => 'timestamp',
+			'completed_at' => 'datetime',
 		];
 
 	protected static function boot(): void
@@ -38,6 +38,7 @@ class Order extends Model
 	const ACTIVE_STATUS = 'active';
 	const COMPLETED_STATUS = 'completed';
 	const CANCELED_STATUS = 'canceled';
+
 
 	public function warehouse(): BelongsTo
 	{
