@@ -12,14 +12,17 @@ class OrderFilter extends QueryFilter
 	{
 		return $this->builder->whereIn('status', $value);
 	}
+
 	public function customer($value): Builder
 	{
 		return $this->builder->where('customer', $value);
 	}
+
 	public function warehouses($value): Builder
 	{
 		return $this->builder->whereIn('warehouse_id', $value);
 	}
+
 	public function products($value): Builder
 	{
 		return $this->builder->whereHas('items', function (Builder $query) use ($value) {
