@@ -5,6 +5,7 @@ namespace App\Actions\Order;
 use App\Http\Requests\Order\OrderRequest;
 use App\Models\Order;
 use App\Models\Stock;
+use App\Traits\ProductMoves;
 
 /**
  * Класс для обработки обновления заказа.
@@ -18,6 +19,7 @@ use App\Models\Stock;
  */
 class UpdateOrderAction
 {
+	use ProductMoves;
 	/**
 	 * Выполняет обновление заказа.
 	 *
@@ -31,6 +33,8 @@ class UpdateOrderAction
 		$data = $request->validated();
 		$items = $data['items'];
 		unset($data['items']);
+
+// todo: Дописать логику с движением товаров!
 
 		\DB::beginTransaction();
 

@@ -2,14 +2,14 @@
 
 namespace App\Actions\ProductMove;
 
-use App\Filters\ProductFilter;
+use App\Filters\ProductMoveFilter;
 use App\Http\Requests\ProductMove\IndexProductMoveRequest;
 use App\Models\ProductMove;
-use App\Sorters\ProductSorter;
+use App\Sorters\ProductMoveSorter;
 
 class IndexProductMoveAction
 {
-	public function handle(IndexProductMoveRequest $request, ProductFilter $filter, ProductSorter $sorter)
+	public function handle(IndexProductMoveRequest $request, ProductMoveFilter $filter, ProductMoveSorter $sorter)
 	{
 		return ProductMove::with(['product', 'warehouse'])
 			->filter($filter)

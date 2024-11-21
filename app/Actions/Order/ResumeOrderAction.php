@@ -4,16 +4,20 @@ namespace App\Actions\Order;
 
 use App\Models\Order;
 use App\Models\Stock;
+use App\Traits\ProductMoves;
 use Illuminate\Support\Collection;
 
 class ResumeOrderAction
 {
+	use ProductMoves;
 	public function handle(Order $order): void
 	{
 		\DB::beginTransaction();
-		$this->deductStocks($order->items, $order->warehouse_id);
+			$this->deductStocks($order->items, $order->warehouse_id);
 
-		$order->update(['status' => Order::ACTIVE_STATUS]);
+			$order->update(['status' => Order::ACTIVE_STATUS]);
+
+			$this->saveMoves($order->id, $order->warehouse_id, 'order_resume', $order->items->toArray());
 		\DB::commit();
 	}
 

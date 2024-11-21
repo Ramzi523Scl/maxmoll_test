@@ -4,16 +4,20 @@ namespace App\Actions\Order;
 
 use App\Models\Order;
 use App\Models\Stock;
+use App\Traits\ProductMoves;
 use Illuminate\Support\Collection;
 
 class CancelOrderAction
 {
+	use ProductMoves;
 	public function handle(Order $order): void
 	{
 		\DB::beginTransaction();
 			$this->restoreStocks($order->items, $order->warehouse_id);
 
 			$order->update(['status' => Order::CANCELED_STATUS]);
+
+			$this->saveMoves($order->id, $order->warehouse_id, 'order_canceled', $order->items->toArray());
 		\DB::commit();
 	}
 
